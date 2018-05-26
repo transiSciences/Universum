@@ -19,7 +19,7 @@ Client.on('message', (message, member) => {
             .setDescription(`Le prefix est: ` + prefix)
             .setThumbnail(`${Client.user.avatarURL}`)
             .addBlankField(true)
-            .addField(":book: Utilitaires", "!help => Te permet d'accéder au menu des commandes\n!ping => Te donne le temps de réponse du bot en millisecondes\n=invite => Te permet d'inviter le bot sur ton serveur")
+            .addField(":book: Utilitaires", "!help => Te permet d'accéder au menu des commandes\n!ping => Te donne le temps de réponse du bot en millisecondes\n!invite => Te permet d'inviter le bot sur ton serveur\n!msg => Te permet d'envoyer un message à un utilisateur utilisation: `!msg <@User#1234> Le message`")
             .addBlankField(true)
             .addField("🙂 Fun", "Aucune commande n'a encore été développée dans cette section")
             .addBlankField(true)
@@ -75,6 +75,20 @@ Client.on('message', (message, member) => {
     }
 
 
+    //commande msg
+    if (message.content.startsWith(prefix + 'msg')) {
+        let receiver = message.mentions.users.first();
+        if (!receiver) return message.channel.send(":x: **Erreur** | L'utilisateur indiqué n'est pas valide")
+        if (message.content.substr(4).lenght === 0) return message.channel.send(":x: | Vous devez remplir un message")
+        let content = message.content.substr(4);
+        var msg_embed = new Discord.RichEmbed()
+            .setColor('RANDOM')
+            .setTitle('Vous avez un message !')
+            .setDescription(`Message de ${message.author.username}`)
+            .addField('Contenu du message', `${content}`)
+            .setFooter(`Created by transiSciences#6105`, Client.user.avatarURL)
+            .setTimestamp()
+    }
 })
 
 Client.login(process.env.TOKEN)
