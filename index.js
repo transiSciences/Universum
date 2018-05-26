@@ -19,7 +19,7 @@ Client.on('message', (message, member) => {
             .setDescription(`Le prefix est: ` + prefix)
             .setThumbnail(`${Client.user.avatarURL}`)
             .addBlankField(true)
-            .addField(":book: Utilitaires", "!help => Te permet d'accéder au menu des commandes\n!ping => Te donne le temps de réponse du bot en millisecondes")
+            .addField(":book: Utilitaires", "!help => Te permet d'accéder au menu des commandes\n!ping => Te donne le temps de réponse du bot en millisecondes\n=invite => Te permet d'inviter le bot sur ton serveur")
             .addBlankField(true)
             .addField("🙂 Fun", "Aucune commande n'a encore été développée dans cette section")
             .addBlankField(true)
@@ -65,6 +65,15 @@ Client.on('message', (message, member) => {
         message.reply("Cet utilisateur a bien été expulsé du serveur :white_check_mark:")
         member.kick(`Expulsé par ${message.author.tag}`)
     }
+
+    //commande invite
+    if (message.content === prefix + 'invite') {
+        var help_embed = new Discord.RichEmbed()
+            .setColor('#ffff')
+            .setDescription("Pour m'inviter sur ton serveur, [clique ici](https://discordapp.com/oauth2/authorize?client_id=436623798448553984&scope=bot&permissions=471022679)")
+        message.channel.send(help_embed)
+    }
+
 
 })
 
