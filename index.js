@@ -23,7 +23,7 @@ Client.on('message', (message, member) => {
             .addBlankField(true)
             .addField("🙂 Fun", "Aucune commande n'a encore été développée dans cette section")
             .addBlankField(true)
-            .addField("🔒 Moderation", "Aucune commande n'a encore été développée dans cette section")
+            .addField("🔒 Moderation", "!ban => Te permet de bannir un utilisateur\n!kick => Te permet d'expluser un membre gênant")
             .setFooter(Client.user.username)
             .setTimestamp()
         message.author.send(help_embed)
@@ -36,6 +36,34 @@ Client.on('message', (message, member) => {
             .setColor('#ffff')
             .setDescription(`pong :ping_pong: | \`${Date.now() - message.createdTimestamp} ms\``)
         message.channel.send(ping_embed)
+    }
+
+
+    //commande ban
+    if (message.content.startsWith(prefix + "ban")) {
+        if (!message.member.permissions.has("BAN_MEMBERS")) return message.reply(":x: | Tu n'a pas la permission de bannir des membres");
+        if (!message.guild.member(Client.user).hasPermission("BAN_MEMBERS")) return message.channel.send(":x: | Je n'ai pas la permission pour bannir des membres");
+        let member = message.mentions.members.first();
+        if (!member) return message.reply(":x: | Mauvais usage fait comme ça : `=ban @User#1234`");
+        if (!member.bannable) return message.reply(":x: | Je ne peux pas le bannir")
+        if (member && message.member.permissions.has("BAN_MEMBERS")) {
+            message.channel.send(`${member.username} a été banni avec succès. :white_check_mark:`)
+            member.send(`Vous avez été banni du serveur ${message.guild.name} par ${message.author.tag}`)
+            member.ban(`banni par ${message.author.tag}`);
+        }
+
+    }
+
+
+    //commande kick
+    if (message.content.startsWith(prefix + 'kick')) {
+        if (!message.guild.member(message.author).hasPermission("MANAGE_GUILD")) return message.channel.send(":x: | Tu n'a pas la permission d'expulser des utilisateurs");
+        if (!message.guild.member(Client.user).hasPermission("MANAGE_GUILD")) return message.channel.send(":x: | Je n'ai pas la permission gérer le serveur");
+        let member = message.guild.member(message.mentions.users.first());
+        if (!member) return message.channel.send(":x: | Mauvais usage fais comme ça: `=kick @User#1234`")
+        member.send(`Vous avez été expulsé du serveur ${message.guild.name} par ${message.author.tag}`)
+        message.reply("Cet utilisateur a bien été expulsé du serveur :white_check_mark:")
+        member.kick(`Expulsé par ${message.author.tag}`)
     }
 
 })
