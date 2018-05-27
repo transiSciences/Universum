@@ -88,6 +88,7 @@ Client.on('message', (message, member) => {
             .addField('Contenu du message', `${content}`)
             .setFooter(`Created by transiSciences#6105`, Client.user.avatarURL)
             .setTimestamp()
+        receiver.send(msg_embed)
     }
 })
 
