@@ -77,6 +77,7 @@ Client.on('message', (message, member) => {
 
     //commande msg
     if (message.content.startsWith(prefix + 'msg')) {
+        message.delete()
         let receiver = message.mentions.users.first();
         if (!receiver) return message.channel.send(":x: **Erreur** | L'utilisateur indiqué n'est pas valide")
         if (message.content.substr(4).lenght === 0) return message.channel.send(":x: | Vous devez remplir un message")
