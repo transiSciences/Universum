@@ -6,6 +6,7 @@ const version = 'Alpha 0.0.1';
 const lang = 'fr';
 const cooldown = new Set();
 const cdseconds = 10;
+const economy = require('discord-eco');
 
 var embedjoin = new Discord.RichEmbed()
     .setTitle("-------------------------------------")
@@ -131,6 +132,18 @@ Client.on('message', (message, member) => {
     if (message.content === prefix + 'vent') {
         message.delete()
         message.channel.send("Un courant d'air passa sur le champ de bataille :cloud_tornado: ")
+    }
+
+    //commande money
+    if (message.content === prefix + 'money') {
+        economy.fetchBalance(message.author.id + message.guild.id).then(i => {
+            var money_embed = new Discord.RichEmbed()
+                .setDescription(`**Banque du serveur ${message.guild.name}**`)
+                .setColor('#f411f1')
+                .addField('Titulaire du compte', message.author.username, true)
+                .addField('Solde du compte', i.money, true)
+            message.channel.send(money_embed)
+        });
     } else {}
 })
 
