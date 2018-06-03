@@ -6,6 +6,8 @@ const version = 'Alpha 0.0.1';
 const lang = 'fr';
 const cooldown = new Set();
 const cdseconds = 10;
+const os = require('os');
+var cpu = os.loadavg();
 
 var embedjoin = new Discord.RichEmbed()
     .setTitle("-------------------------------------")
@@ -57,7 +59,7 @@ Client.on('message', async(message, member) => {
     //commande ping
     if (message.content === prefix + 'ping') {
         const m = await message.channel.send("Loading...");
-        m.edit(`Pong! Ping local\`${m.createdTimestamp - message.createdTimestamp} ms\`. Ping API \`${Math.round(Client.ping)} ms\``);
+        m.edit(`Pong! Ping local \`${m.createdTimestamp - message.createdTimestamp} ms\`. Ping API \`${Math.round(Client.ping)} ms\``);
     }
 
 
@@ -129,6 +131,11 @@ Client.on('message', async(message, member) => {
     if (message.content === prefix + 'vent') {
         message.delete()
         message.channel.send("Un courant d'air passa sur le champ de bataille :cloud_tornado: ")
+    }
+
+    //commande test
+    if (message.content === prefix + 'test') {
+        message.channel.send(Math.ceil(cpu[1] * 100) / 10 + "%")
     } else {}
 })
 
