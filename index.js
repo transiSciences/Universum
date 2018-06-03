@@ -116,9 +116,20 @@ Client.on('message', (message, member) => {
 
     //commande mc
     if (message.content === prefix + 'mc') {
+        if (cooldown.has(message.author.id)) return message.channel.send('Tu doit attendre avant de pouvoir utiliser la commande !')
         let memberCount = message.guild.memberCount;
+        const cooldown = new Set();
+        let cdseconds = 600;
+        cooldown.add(message.author.id)
         message.channel.send(`Nous sommes actuellement **${memberCount}** sur le serveur`)
+        setTimeout(() => {
+            cooldown.delete(message.author.id)
+        }, cdseconds * 1000);
     } else {}
 })
+
+Client.on('message', message => {
+    if (message.author === Client.user) return;
+});
 
 Client.login(process.env.TOKEN)
