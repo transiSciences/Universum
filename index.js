@@ -56,8 +56,8 @@ Client.on('message', async(message, member) => {
 
     //commande ping
     if (message.content === prefix + 'ping') {
-        const m = await message.channel.send("Ping?");
-        m.edit(`Pong! Ping local \`${Client.pings[0]} ms\`. Ping API \`${Math.round(Client.ping)} ms\``);
+        const m = await message.channel.send("Loading...");
+        m.edit(`Pong! Ping local\`${m.createdTimestamp - message.createdTimestamp} ms\`. Ping API \`${Math.round(Client.ping)} ms\``);
     }
 
 
