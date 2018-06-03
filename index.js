@@ -91,6 +91,12 @@ Client.on('message', (message, member) => {
             .setTimestamp()
         receiver.send(msg_embed)
     }
+
+    //commande mc
+    if (message.content === prefix + 'mc') {
+        let memberCount = message.guild.memberCount;
+        message.channel.send(`Nous sommes actuellement ${memberCount} sur le serveur`)
+    } else {}
 })
 
 Client.login(process.env.TOKEN)
