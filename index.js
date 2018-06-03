@@ -5,9 +5,31 @@ const name = 'Universum';
 const version = 'Alpha 0.0.1';
 const lang = 'fr';
 
+var embedjoin = new Discord.RichEmbed()
+    .setTitle("-------------------------------------")
+    .addField(":wave: Bienvenue sur le serveur Universum !", "-------------------------------------")
+    .addField(`:smile: J'espère que tu passeras un bon moment !`, "-------------------------------------")
+    .addField(":wink: N'hésite pas à faire un tour #reglement !", "-------------------------------------")
+    .setColor("0x07CAF7")
+
+var embedleave = new Discord.RichEmbed()
+    .setTitle("-------------------------------------")
+    .addField(":worried: Un membre a quitté le serveur Universum !", "-------------------------------------")
+    .addField(`:smile: J'espère quele serveur lui a plu !`, "-------------------------------------")
+    .addField(":wave: Au plaisir de le revoir !", "-------------------------------------")
+    .setColor("0x07CAF7")
+
 Client.on('ready', () => {
     console.log(`Logged in as ${name} ${version} ${lang}`)
     Client.user.setActivity('!help | Développement en cours !')
+});
+
+Client.on('guildMemberAdd', member => {
+    member.guild.channels.find('452777552499572757').send(embedjoin)
+});
+
+Client.on('guildMemberRemove', member => {
+    member.guild.channels.find('452777552499572757').send(embedleave)
 });
 
 Client.on('message', (message, member) => {
@@ -19,7 +41,7 @@ Client.on('message', (message, member) => {
             .setDescription(`Le prefix est: ` + prefix)
             .setThumbnail(`${Client.user.avatarURL}`)
             .addBlankField(true)
-            .addField(":book: Utilitaires", "!help => Te permet d'accéder au menu des commandes\n!ping => Te donne le temps de réponse du bot en millisecondes\n!invite => Te permet d'inviter le bot sur ton serveur\n!msg => Te permet d'envoyer un message à un utilisateur utilisation: `!msg <@User#1234> Le message`")
+            .addField(":book: Utilitaires", "!help => Te permet d'accéder au menu des commandes\n!ping => Te donne le temps de réponse du bot en millisecondes\n!invite => Te permet d'inviter le bot sur ton serveur\n!msg => Te permet d'envoyer un message à un utilisateur utilisation: `!msg <@User#1234> Le message`\n!mc => Te donne le nombre de membre sur le serveur")
             .addBlankField(true)
             .addField("🙂 Fun", "Aucune commande n'a encore été développée dans cette section")
             .addBlankField(true)
@@ -95,7 +117,7 @@ Client.on('message', (message, member) => {
     //commande mc
     if (message.content === prefix + 'mc') {
         let memberCount = message.guild.memberCount;
-        message.channel.send(`Nous sommes actuellement ${memberCount} sur le serveur`)
+        message.channel.send(`Nous sommes actuellement **${memberCount}** sur le serveur`)
     } else {}
 })
 
