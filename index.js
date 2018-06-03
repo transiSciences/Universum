@@ -24,11 +24,11 @@ Client.on('ready', () => {
     Client.user.setActivity('!help | Développement en cours !')
 });
 
-Client.on('guildMemberAdd', member => {
+Client.on('guildMemberAdd', (member) => {
     member.guild.channels.find('452777552499572757').send(embedjoin)
 });
 
-Client.on('guildMemberRemove', member => {
+Client.on('guildMemberRemove', (member) => {
     member.guild.channels.find('452777552499572757').send(embedleave)
 });
 
