@@ -34,7 +34,7 @@ Client.on('guildMemberRemove', (member) => {
     member.guild.channels.find('id', '452777552499572757').send(embedleave)
 });
 
-Client.on('message', (message, member) => {
+Client.on('message', async(message, member) => {
     //commande help
     if (message.content === prefix + 'help') {
         var help_embed = new Discord.RichEmbed()
