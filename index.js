@@ -118,16 +118,11 @@ Client.on('message', (message, member) => {
 
     //commande mc
     if (message.content === prefix + 'mc') {
+        if (cooldown.has(message.author.id)) return message.channel.send('Tu dois attendre 10 secondes avant de povoir réutiliser la commande')
         let memberCount = message.guild.memberCount;
+        cooldown.add(message.author.id)
         if (cooldown.has(message.author.id)) return message.channel.send('Tu doit attendre avant de pouvoir utiliser la commande !')
         message.channel.send(`Nous sommes actuellement **${memberCount}** sur le serveur`)
-    }
-
-    //commande test
-    if (message.content === prefix + 'test') {
-        if (cooldown.has(message.author.id)) return message.channel.send('Tu dois attendre')
-        cooldown.add(message.author.id)
-        message.channel.send('Exemple de cooldown')
         setTimeout(() => {
             cooldown.delete(message.author.id)
         }, cdseconds * 1000);
