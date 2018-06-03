@@ -119,7 +119,7 @@ Client.on('message', (message, member) => {
         if (cooldown.has(message.author.id)) return message.channel.send('Tu doit attendre avant de pouvoir utiliser la commande !')
         let memberCount = message.guild.memberCount;
         const cooldown = new Set();
-        let cdseconds = 600;
+        let cdseconds = 1;
         cooldown.add(message.author.id)
         message.channel.send(`Nous sommes actuellement **${memberCount}** sur le serveur`)
         setTimeout(() => {
