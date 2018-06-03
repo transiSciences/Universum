@@ -4,8 +4,6 @@ const prefix = '!';
 const name = 'Universum';
 const version = 'Alpha 0.0.1';
 const lang = 'fr';
-const cooldown = new Set();
-const cdseconds = 10;
 
 var embedjoin = new Discord.RichEmbed()
     .setTitle("-------------------------------------")
@@ -118,6 +116,8 @@ Client.on('message', (message, member) => {
 
     //commande mc
     if (message.content === prefix + 'mc') {
+        const cooldown = new Set();
+        const cdseconds = 10;
         if (cooldown.has(message.author.id)) return message.channel.send('Tu dois attendre 10 secondes avant de povoir réutiliser la commande')
         let memberCount = message.guild.memberCount;
         cooldown.add(message.author.id)
