@@ -8,6 +8,7 @@ const cooldown = new Set();
 const cdseconds = 10;
 const os = require('os');
 var cpu = os.loadavg();
+var play = false;
 
 var embedjoin = new Discord.RichEmbed()
     .setTitle("-------------------------------------")
@@ -139,13 +140,12 @@ Client.on('message', async(message, member) => {
     }
 
     //commande tic-tac-toe
-    if (message.content === prefix + 'tic-tac-toe') {
+    if (message.content === prefix + 'tic-tac-toe' || play === true) {
         const player_1 = message.author.username;
         const titato = await message.channel.send(`Jouez avec **${message.author.username}** en utilisant la commande \`!join ${message.author.username}\`\n**Ne commencer la partie seulement si vous en avez le temps !**`)
-    }
-
-    if (message.content === `!join ${player_1}`) {
-        titato.edit(`\`\`\`1A | 1B | 1C\n------------\n2A | 2B | 2C\n------------\n3A | 3B | 3C\`\`\``);
+        if (message.content === `!join ${player_1}`) {
+            titato.edit(`\`\`\`1A | 1B | 1C\n------------\n2A | 2B | 2C\n------------\n3A | 3B | 3C\`\`\``);
+        }
     } else {}
 })
 
