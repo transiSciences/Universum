@@ -141,7 +141,10 @@ Client.on('message', async(message, member) => {
     //commande tic-tac-toe
     if (message.content === prefix + 'tic-tac-toe') {
         var player_1 = message.author.username;
-        const ttt = await message.channel.send(`Jouez avec **${message.author.username}** en utilisant la commande \`/join ${message.author.username}\`\n**Ne commencer la partie seulement si vous en avez le temps !**`)
+        const ttt = await message.channel.send(`Jouez avec **${message.author.username}** en utilisant la commande \`!join ${message.author.username}\`\n**Ne commencer la partie seulement si vous en avez le temps !**`)
+        if (message.content === prefix + `join ${player_1}`) {
+            ttt.edit(`\`\`\`1A | 1B | 1C\n------------\n2A | 2B | 2C\n------------\n3A | 3B | 3C\`\`\``)
+        }
     } else {}
 })
 
