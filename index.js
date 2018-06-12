@@ -141,6 +141,7 @@ Client.on('message', async(message, member) => {
 
     //commande tic-tac-toe
     if (message.content === prefix + 'tic-tac-toe' || play === true) {
+        play = true;
         const player_1 = message.author.username;
         const titato = await message.channel.send(`Jouez avec **${message.author.username}** en utilisant la commande \`!join ${message.author.username}\`\n**Ne commencer la partie seulement si vous en avez le temps !**`)
         if (message.content === `!join ${player_1}`) {
