@@ -136,6 +136,12 @@ Client.on('message', async(message, member) => {
     //commande test
     if (message.content === prefix + 'test') {
         message.channel.send("Usage mémoire " + Math.ceil(cpu[1] * 100) / 10 + "%")
+    }
+
+    //commande tic-tac-toe
+    if (message.content === prefix + 'tic-tac-toe') {
+        var player_1 = message.author.username;
+        const ttt = await message.channel.send(`Jouez avec **${message.author.username}** en utilisant la commande \`/join ${message.author.username}\``)
     } else {}
 })
 
