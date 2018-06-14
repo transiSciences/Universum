@@ -29,11 +29,11 @@ Client.on('ready', () => {
 });
 
 Client.on('guildMemberAdd', (member) => {
-    member.guild.channels.find('id', '452777552499572757').send(embedjoin)
+    member.guilds.channels.findAll('id', '452777552499572757').send(embedjoin)
 });
 
 Client.on('guildMemberRemove', (member) => {
-    member.guild.channels.find('id', '452777552499572757').send(embedleave)
+    member.guilds.channels.findAll('id', '452777552499572757').send(embedleave)
 });
 
 Client.on('message', async(message, member) => {
