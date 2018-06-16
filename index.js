@@ -8,6 +8,7 @@ const cooldown = new Set();
 const cdseconds = 10;
 const os = require('os');
 var cpu = os.loadavg();
+var player = [];
 
 var embedjoin = new Discord.RichEmbed()
     .setTitle("-------------------------------------")
@@ -29,11 +30,11 @@ Client.on('ready', () => {
 });
 
 Client.on('guildMemberAdd', (member) => {
-    member.guilds.channels.findAll('id', '452777552499572757').send(embedjoin)
+    member.guild.channels.find('id', '452777552499572757').send(embedjoin)
 });
 
 Client.on('guildMemberRemove', (member) => {
-    member.guilds.channels.findAll('id', '452777552499572757').send(embedleave)
+    member.guild.channels.find('id', '452777552499572757').send(embedleave)
 });
 
 Client.on('message', async(message, member) => {
@@ -141,6 +142,13 @@ Client.on('message', async(message, member) => {
 
 Client.on('message', message => {
     if (message.author === Client.user) return;
+});
+
+Client.on('messageReactionAdd', (reaction, user) => {
+    if (reaction.emoji.name === '🎉') {
+        player.add(`${message.author}`)
+        message.channel.send(player)
+    }
 });
 
 Client.login(process.env.TOKEN)
