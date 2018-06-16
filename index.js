@@ -145,9 +145,9 @@ Client.on('message', message => {
 });
 
 Client.on('messageReactionAdd', (reaction, user, message) => {
-    if (reaction.emoji.name === ':raised_hand:') {
+    if (reaction.emoji.name === ':tada:') {
         player.add(`${message.author}`)
-        message.channel.send(player)
+        Client.channel.send(player)
     }
 });
 
