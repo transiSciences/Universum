@@ -147,7 +147,7 @@ Client.on('message', message => {
 Client.on('messageReactionAdd', (reaction, user, message) => {
     if (reaction.emoji.name === ':tada:') {
         player.add(`${message.author}`)
-        Client.channel.send(player)
+        Client.channels.get('457253747794509844').send(player)
     }
 });
 
