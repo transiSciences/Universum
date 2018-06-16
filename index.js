@@ -144,8 +144,8 @@ Client.on('message', message => {
     if (message.author === Client.user) return;
 });
 
-Client.on('messageReactionAdd', (reaction, user) => {
-    if (reaction.emoji.name === '🎉') {
+Client.on('messageReactionAdd', (reaction, user, message) => {
+    if (reaction.emoji.name === ':raised_hand:') {
         player.add(`${message.author}`)
         message.channel.send(player)
     }
